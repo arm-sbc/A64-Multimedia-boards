@@ -5,5 +5,7 @@ for compiling , follow below instructions.
 
 TESTED on Ubuntu 22.04
 
+```sh
+# This is a shell command
 apt-get install gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu flex bison swig python3-dev device-tree-compiler git libncurses-dev python3-setuptools libssl-dev pip2 pip
 pip install pyelftools
