@@ -33,7 +33,7 @@ make CROSS_COMPILE=aarch64-linux-gnu- a64-arm-sbc-m3x_defconfig
 make CROSS_COMPILE=aarch64-linux-gnu-
 
 #### flashing uboot to sd-card,  first clean the sd-card ###
-
+#### use any of below commands based on your requirement ###
 sudo dd if=/dev/zero of=/dev/sdX bs=1M count=1  # clear partition and boot sector
 sudo dd if=/dev/zero of=/dev/sdX bs=1k count=1023 seek=1 # clear bootloader without partitions
 sudo dd if=/dev/zero of=/dev/sdX bs=8192 # to clean it completely
