@@ -67,4 +67,8 @@ sudo mkfs.ext4 /dev/sdX1
 this will create a ext4 partition.
 
 #### compiling kernel #####
+go to https://kernel.org/
+then select the stable veriosn nd download the tarballs.
+then tar xf linux-6.9.X.tar.xz
+cd linux-6.9.X
 
