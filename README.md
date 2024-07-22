@@ -97,7 +97,7 @@ it is possible to add packages at this stage.
         debootstrap --arch=arm64 --foreign <distro> /mnt/  # for arm64 architecture
         debootstrap --arch=armhf --foreign <distro> /mnt/  # for armhf architecture
 
-it is possible to use any <distro> from debian and ubuntu with their codename.
+it is possible to use any distro from debian and ubuntu with their codename.
 Ubuntu 24.04 : Noble
 Ubuntu 22.04 : Jammy
 Debian 12  :  bookworm
