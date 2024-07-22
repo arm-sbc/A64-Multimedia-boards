@@ -44,7 +44,8 @@ sudo dd if=u-boot-sunxi-with-spl.bin of=/dev/sdX bs=1024 seek=8
 sync
 
 ### now you can insert the card into the board, connect the debug port with a serial cable , only TX, RX and GND port,
-do not connect the voltage)  ( incase of picocom installed and using USB UART cable)
+do not connect the voltage)
+incase of picocom installed and using USB UART cable)
 
 sudo picocom -b 115200 -r -l /dev/ttyUSB0
 
