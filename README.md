@@ -26,14 +26,21 @@ cd crust
 make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl- pinephone_defconfig
 make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl-
 cd ..
+cd u-boot
+git tag -l
+git branch -C XXXXX ( choose teh latest branch) 
+
 patch -Np1 -i m3x-uboot.patch
+
 export BL31=..//arm-trusted-firmware/build/sun50i_a64/release/bl31.bin
 export SCP=..//crust/build/scp/scp.bin
+
 make CROSS_COMPILE=aarch64-linux-gnu- a64-arm-sbc-m3x_defconfig
 make CROSS_COMPILE=aarch64-linux-gnu-
 
 #### flashing uboot to sd-card,  first clean the sd-card ###
 #### use any of below commands based on your requirement ###
+
 sudo dd if=/dev/zero of=/dev/sdX bs=1M count=1  # clear partition and boot sector
 sudo dd if=/dev/zero of=/dev/sdX bs=1k count=1023 seek=1 # clear bootloader without partitions
 sudo dd if=/dev/zero of=/dev/sdX bs=8192 # to clean it completely
