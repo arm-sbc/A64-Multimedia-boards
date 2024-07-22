@@ -69,6 +69,29 @@ this will create a ext4 partition.
 #### compiling kernel #####
 go to https://kernel.org/
 then select the stable veriosn nd download the tarballs.
-then tar xf linux-6.9.X.tar.xz
+then
+tar xf linux-6.9.X.tar.xz
 cd linux-6.9.X
+patch -Np1 -i ..//a64-sunxi-defconfig.patch
+
+ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make a64-sunxi_defconfig
+ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make menuconfig ( you may twaek the configuration)
+ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make -j8 Image
+ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make dtbs
+ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make -j8 modules
+ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- INSTALL_MOD_PATH=OUT make modules modules_install
+
+#### now before copiying kernel files, it required rootfs , create own rootfs or download from
+https://images.linuxcontainers.org/images/
+### by default there will be no root password, to set root password follow below steps,
+### mount the sd-card to /mnt
+sudo mount /dev/sdX /mnt
+sudo tar xf rootfs.tar.xz  -C /mnt
+sudo cp /usr/bin/qemu-aarch64-static /mnt/usr/bin/
+sudo chroot /mnt /usr/bin/qemu-aarch64-static /bin/sh -i
+passwd then set the password
+it is possible to add packages at this stage.
+#### OR CREATE own rootfs.
+
+
 
