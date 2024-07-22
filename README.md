@@ -75,10 +75,10 @@ then
         tar xf linux-6.9.X.tar.xz
         cd linux-6.9.X
         patch -Np1 -i ..//a64-sunxi-defconfig.patch
-        patch -Np1 -i ..//a64-sunxi-defconfig.patch
+        patch -Np1 -i ..//a64-mx3-kernel.patch
 
         ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make a64-sunxi_defconfig
-        ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make menuconfig ( you may twaek the configuration)
+        ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make menuconfig ( you may tweak the configuration)
         ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make -j8 Image
         ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make dtbs
         ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make -j8 modules
