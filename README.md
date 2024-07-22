@@ -25,3 +25,5 @@ cd crust
 make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl- pinephone_defconfig
 make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl-
 cd ..//u-boot
+### For M3X board downlaod patch m3x-uboot.patch #####
+
