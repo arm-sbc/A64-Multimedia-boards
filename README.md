@@ -1,12 +1,12 @@
 # A64-Multimedia-boards
 ## General Instructions
-The uboot and kernel device tree files are available for download , either as a patch or as individual files.
+The uboot,kernel and device tree files are available for download , either as a patch or as individual files.
 for compiling , follow below instructions.
 
 TESTED on Ubuntu 22.04
 
 ```sh
-apt-get install gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu flex bison swig python3-dev device-tree-compiler git libncurses-dev python3-setuptools libssl-dev pip2 pip
+apt-get install gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu flex bison swig python3-dev device-tree-compiler git libncurses-dev python3-setuptools libssl-dev pip2 pip picocom
 pip install pyelftools
 
 git clone https://github.com/arm-sbc/A64-Multimedia-boards.git
@@ -32,8 +32,27 @@ export SCP=..//crust/build/scp/scp.bin
 make CROSS_COMPILE=aarch64-linux-gnu- a64-arm-sbc-m3x_defconfig
 make CROSS_COMPILE=aarch64-linux-gnu-
 
-#### flashing uboot to sd-card first clean the sd-card ###
+#### flashing uboot to sd-card,  first clean the sd-card ###
 
 sudo dd if=/dev/zero of=/dev/sdX bs=1M count=1  # clear partition and boot sector
 sudo dd if=/dev/zero of=/dev/sdX bs=1k count=1023 seek=1 # clear bootloader without partitions
 sudo dd if=/dev/zero of=/dev/sdX bs=8192 # to clean it completely
+
+then
+
+sudo dd if=u-boot-sunxi-with-spl.bin of=/dev/sdc bs=1024 seek=8
+sync
+
+### now you can insert the card into the board, connect the debug port with a serial cable , only TX, RX and GND port, do not connect the voltage)  ( incase of picocom installed and using USB UART cable)
+sudo picocom -b 115200 -r -l /dev/ttyUSB0
+####you will see bootlog
+
+#### now remove tehsd-card put back into the computer,
+#### create partion of OS
+sudo fdisk /dev/sdX
+type n
+### then enter, enter again and again
+sudo mkfs.ext4 /dev/sdX1
+this will create a ext4 partition.
+
+
