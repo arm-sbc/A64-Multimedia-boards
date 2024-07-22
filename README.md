@@ -45,15 +45,18 @@ sync
 
 ### now you can insert the card into the board, connect the debug port with a serial cable , only TX, RX and GND port,
 do not connect the voltage)  ( incase of picocom installed and using USB UART cable)
-sudo picocom -b 115200 -r -l /dev/ttyUSB0
-####you will see bootlog
 
-#### now remove tehsd-card put back into the computer,
-#### create partion of OS
+sudo picocom -b 115200 -r -l /dev/ttyUSB0
+
+#### you will see bootlog
+
+#### now remove the sd-card and put back into the computer,
+#### create partion of OS ###
 sudo fdisk /dev/sdX
 type n
 ### then enter, enter again and again
 sudo mkfs.ext4 /dev/sdX1
 this will create a ext4 partition.
 
+#### compiling kernel #####
 
