@@ -51,8 +51,8 @@ then
         sync
 
 now you can insert the card into the board, connect the debug port with a serial cable , only TX, RX and GND port,
-do not connect the voltage)
-incase of picocom installed and using USB UART cable)
+## do not connect the voltage pins
+incase of picocom installed and using USB UART cable
 
         sudo picocom -b 115200 -r -l /dev/ttyUSB0
 
@@ -61,14 +61,14 @@ incase of picocom installed and using USB UART cable)
 #### now remove the sd-card and put back into the computer,
 #### create partion of OS ###
         sudo fdisk /dev/sdX
-        n
-
+        n ( enter, enter) 
+        w
         sudo mkfs.ext4 /dev/sdX1
-this will create a ext4 partition.
+this will create an ext4 partition.
 
-#### compiling kernel #####
+#### compiling kernel 
         https://kernel.org/
-then select the stable veriosn nd download the tarballs.
+then select the stable veriosn and download the tarballs.
 then
         tar xf linux-6.9.X.tar.xz
         cd linux-6.9.X
@@ -93,30 +93,29 @@ then
 it is possible to add packages at this stage.
 #### OR CREATE own rootfs.
 ### mount the sd-card to /mnt
-sudo mount /dev/sdX /mnt
-debootstrap --arch=arm64 --foreign <distro> /mnt/  # for arm64 architecture
-debootstrap --arch=armhf --foreign <distro> /mnt/  # for armhf architecture
+        sudo mount /dev/sdX /mnt
+        debootstrap --arch=arm64 --foreign <distro> /mnt/  # for arm64 architecture
+        debootstrap --arch=armhf --foreign <distro> /mnt/  # for armhf architecture
 
 it is possible to use any <distro> from debian and ubuntu with their codename.
-
 Ubuntu 24.04 : Noble
 Ubuntu 22.04 : Jammy
 Debian 12  :  bookworm
 Debiam 11  :  bullseye
 
-cp /usr/bin/qemu-arm-static /mnt/usr/bin/  # for armhf 
-chroot /mnt /usr/bin/qemu-arm-static /bin/sh -i # for armhf
+        cp /usr/bin/qemu-arm-static /mnt/usr/bin/  # for armhf 
+        chroot /mnt /usr/bin/qemu-arm-static /bin/sh -i # for armhf
 
-cp /usr/bin/qemu-aarch64-static /mnt/usr/bin/   # for arm64
-chroot /mnt /usr/bin/qemu-aarch64-static /bin/sh -i # for arm64
+        cp /usr/bin/qemu-aarch64-static /mnt/usr/bin/   # for arm64
+        chroot /mnt /usr/bin/qemu-aarch64-static /bin/sh -i # for arm64
 
-/debootstrap/debootstrap --second-stage
-passwd then set the password
+        /debootstrap/debootstrap --second-stage
+        passwd then set the password
 it is possible to add packages at this stage like
-apt install locales
-dpkg-reconfigure locales
-apt install openssh-server
+        apt install locales
+        dpkg-reconfigure locales
+        apt install openssh-server
 
 ### add serial console
-systemctl enable serial-getty@ttyS0.service  # for sunxi boards
-systemctl enable serial-getty@ttyS2.service  # for rockchip boards
+        systemctl enable serial-getty@ttyS0.service  # for sunxi boards
+        systemctl enable serial-getty@ttyS2.service  # for rockchip boards
