@@ -123,3 +123,19 @@ it is possible to add packages at this stage like
 ### add serial console
         systemctl enable serial-getty@ttyS0.service  # for sunxi boards
         systemctl enable serial-getty@ttyS2.service  # for rockchip boards
+### configure ethernet
+
+        nano /etc/netplan/config-eth.yaml
+#### then add the foolwing on ubuntu rootfs
+                network:
+                        renderer: networkd
+                          ethernets:
+                            end0:
+                              dhcp4: true
+#### add below for debian rootfs
+        nano /etc/network/interfaces
+#### then add the following
+        auto lo end0
+        allow-hotplug end0
+        iface lo inet loopback
+        iface end0 inet dhcp
