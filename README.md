@@ -13,5 +13,5 @@ pip install pyelftools
 git clone https://github.com/ARM-software/arm-trusted-firmware.git
 git clone https://github.cnanopi_a64_defconfigom/crust-firmware/crust
 git clone git://git.denx.de/u-boot.git
-
+'''sh
 ### Compiling
