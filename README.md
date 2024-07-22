@@ -14,4 +14,14 @@ git clone https://github.com/ARM-software/arm-trusted-firmware.git
 git clone https://github.cnanopi_a64_defconfigom/crust-firmware/crust
 git clone git://git.denx.de/u-boot.git
 
-### Compiling
+#### For compiling Bl31.bin ####
+cd arm-trusted-firmware
+make CROSS_COMPILE=aarch64-linux-gnu- PLAT=sun50i_a64 DEBUG=1 bl31
+### For complimg scp.bin Download the toolchain ###
+cd ...
+wget https://musl.cc/or1k-linux-musl-cross.tgz
+tar xf or1k-linux-musl-cross.tgz
+cd crust
+make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl- pinephone_defconfig
+make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl-
+cd ..//u-boot
