@@ -185,4 +185,5 @@ it is possible to add packages at this stage like
        ....output will be as follows 
        /dev/sdd1: UUID="b208c36b-39d5-47b9-b67d-943f4d4798b4" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="8c4fe090-01"
        copy the PARTUUID and replace in extlinux conf.
-     
+       sudo umount /mnt
+#### Now put sd-card in teh board and power up, the board will boot and it is possible to see teh logs through hdmi.     
