@@ -28,7 +28,7 @@ make CROSS_COMPILE=..//or1k-linux-musl-cross/bin/or1k-linux-musl-
 cd ..
 cd u-boot
 git tag -l
-git branch -C XXXXX ( choose teh latest branch) 
+git branch -C XXXXX ( choose the latest branch) 
 
 patch -Np1 -i m3x-uboot.patch
 
