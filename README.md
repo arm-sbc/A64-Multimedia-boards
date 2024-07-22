@@ -16,6 +16,8 @@ git clone git://git.denx.de/u-boot.git
 
 ####for U-boot it required arm trusted firmware and scp ( scp is optional, the board will boot without scp) ####
 #### For compiling Bl31.bin ####
+
+
 cd arm-trusted-firmware
 make CROSS_COMPILE=aarch64-linux-gnu- PLAT=sun50i_a64 DEBUG=1 bl31
 ### For complimg scp.bin Download the toolchain ###
