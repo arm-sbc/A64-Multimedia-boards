@@ -150,13 +150,24 @@ it is possible to add packages at this stage like
         deb-src http://ports.ubuntu.com/ noble-security main universe
         deb http://ports.ubuntu.com/ noblel-updates main universe
         deb-src http://ports.ubuntu.com/ noble -updates main universe
-##### for debian use the following
+##### for debian use the following and chnage the distro name 
         nano /etc/apt/sources.list
         then add below repositories 
         
-        deb http://deb.debian.org/debian/ buster main contrib non-free
-        deb-src http://deb.debian.org/debian/ buster main contrib non-free
-        deb http://deb.debian.org/debian/ buster-updates main contrib non-free
-        deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
-        deb http://deb.debian.org/debian-security/ buster/updates main contrib non-free
-        deb-src http://deb.debian.org/debian-security/ buster/updates main contrib non-free
+       deb http://deb.debian.org/debian bookworm main non-free-firmware
+       deb-src http://deb.debian.org/debian bookworm main non-free-firmware
+       deb http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+       deb-src http://deb.debian.org/debian-security/ bookworm-security main non-free-firmware
+       deb http://deb.debian.org/debian bookworm-updates main non-free-firmware       
+       deb-src http://deb.debian.org/debian bookworm-updates main non-free-firmware
+##### make tar ball what you cretaed
+        tar -cjpf /home/user/sunxi_rootfs.tar.bz2 .
+
+        change the path as required, also the dot in the end is required
+##### copiying kernel files
+        sudo cp arch/arm64/boot/Image /mnt/boot
+        sudo cp arch/arm64/boot/dts/allwinner/sun50i-a64-arm-sbc-m3x.dtb /mnt/boot
+        sudo cp -rf OUT/lib/modules /mnt/lib/
+##### download firmware
+       git clone  https://github.com/armbian/firmware.git
+       then copy the firmware to /mnt/lib/
