@@ -416,3 +416,69 @@ diff -urN ..//linux-6.9.9/arch/arm64/boot/dts/allwinner/Makefile linux-6.10-rc6/
  dtb-$(CONFIG_ARCH_SUNXI) += sun50i-a64-bananapi-m64.dtb
  dtb-$(CONFIG_ARCH_SUNXI) += sun50i-a64-nanopi-a64.dtb
  dtb-$(CONFIG_ARCH_SUNXI) += sun50i-a64-oceanic-5205-5inmfd.dtb
+ --- linux-6.7.4/sound/soc/codecs/simple-amplifier.c	2024-02-06 00:17:12.000000000 +0400
++++ rk3288/linux-6.7.4/sound/soc/codecs/simple-amplifier.c	2024-02-16 09:31:42.185772085 +0400
+@@ -13,6 +13,8 @@
+ 
+ struct simple_amp {
+ 	struct gpio_desc *gpiod_enable;
++	struct gpio_desc *gpiod_shutdown; /* New shutdown GPIO (PH15)*/
++	struct gpio_desc *gpiod_mute; /*New mute GPIO (PH25) */
+ };
+ 
+ static int drv_event(struct snd_soc_dapm_widget *w,
+@@ -21,13 +23,19 @@
+ 	struct snd_soc_component *c = snd_soc_dapm_to_component(w->dapm);
+ 	struct simple_amp *priv = snd_soc_component_get_drvdata(c);
+ 	int val;
++	int shutdown_val; /* Declare shutdown_val*/
++    int mute_val;     /* Declare mute_val */
+ 
+ 	switch (event) {
+ 	case SND_SOC_DAPM_POST_PMU:
+-		val = 1;
++		val = 1;/* Enable amplifier */
++		shutdown_val = 1; /* No shutdown */
++		mute_val = 0; /* Unmute */
+ 		break;
+ 	case SND_SOC_DAPM_PRE_PMD:
+-		val = 0;
++		val = 0; /*Disable amplifier*/
++		shutdown_val = 0; /* Shutdown */
++		mute_val = 1; /* Mute */
+ 		break;
+ 	default:
+ 		WARN(1, "Unexpected event");
+@@ -35,6 +43,8 @@
+ 	}
+ 
+ 	gpiod_set_value_cansleep(priv->gpiod_enable, val);
++	gpiod_set_value_cansleep(priv->gpiod_shutdown, shutdown_val);
++	gpiod_set_value_cansleep(priv->gpiod_mute, mute_val);
+ 
+ 	return 0;
+ }
+@@ -75,6 +85,23 @@
+ 		return -ENOMEM;
+ 	platform_set_drvdata(pdev, priv);
+ 
++	/*Get the enable GPIO (existing) */
++	priv->gpiod_enable = devm_gpiod_get_optional(dev, "enable", GPIOD_OUT_LOW);
++	if (IS_ERR(priv->gpiod_enable))
++		return dev_err_probe(dev, PTR_ERR(priv->gpiod_enable),
++				     "Failed to get 'enable' gpio");
++
++	/* Get the shutdown GPIO (PH15) */
++	priv->gpiod_shutdown = devm_gpiod_get_optional(dev, "shutdown", GPIOD_OUT_LOW);
++	if (IS_ERR(priv->gpiod_shutdown))
++		return dev_err_probe(dev, PTR_ERR(priv->gpiod_shutdown),
++				     "Failed to get 'shutdown' gpio");
++
++	/* Get the mute GPIO (PH25) */
++	priv->gpiod_mute = devm_gpiod_get_optional(dev, "mute", GPIOD_OUT_LOW);
++	if (IS_ERR(priv->gpiod_mute))
++		return dev_err_probe(dev, PTR_ERR(priv->gpiod_mute),
++				     "Failed to get 'mute' gpio");
+ 	priv->gpiod_enable = devm_gpiod_get_optional(dev, "enable",
+ 						     GPIOD_OUT_LOW);
+ 	if (IS_ERR(priv->gpiod_enable))
