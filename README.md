@@ -18,7 +18,7 @@ for U-boot it required arm trusted firmware and scp ( scp is optional, the board
 
         cd arm-trusted-firmware
         make CROSS_COMPILE=aarch64-linux-gnu- PLAT=sun50i_a64 DEBUG=1 bl31
-### For complimg scp.bin Download the toolchain ###
+#### For complimg scp.bin Download the toolchain ###
         cd ...
         wget https://musl.cc/or1k-linux-musl-cross.tgz
         tar xf or1k-linux-musl-cross.tgz
@@ -51,7 +51,7 @@ then
         sync
 
 now you can insert the card into the board, connect the debug port with a serial cable , only TX, RX and GND port,
-## do not connect the voltage pins
+#### do not connect the voltage pins
 incase of picocom installed and using USB UART cable
 
         sudo picocom -b 115200 -r -l /dev/ttyUSB0
@@ -83,8 +83,8 @@ then
 
 #### now before copiying kernel files, it required rootfs , create own rootfs or download from
         https://images.linuxcontainers.org/images/
-### by default there will be no root password, to set root password follow below steps,
-### mount the sd-card to /mnt
+#### by default there will be no root password, to set root password follow below steps,
+#### mount the sd-card to /mnt
         sudo mount /dev/sdX /mnt
         sudo tar xf rootfs.tar.xz  -C /mnt
         sudo cp /usr/bin/qemu-aarch64-static /mnt/usr/bin/
@@ -92,7 +92,7 @@ then
         passwd then set the password
 it is possible to add packages at this stage.
 #### OR CREATE own rootfs.
-### mount the sd-card to /mnt
+#### mount the sd-card to /mnt
         sudo mount /dev/sdX /mnt
         debootstrap --arch=arm64 --foreign <distro> /mnt/  # for arm64 architecture
         debootstrap --arch=armhf --foreign <distro> /mnt/  # for armhf architecture
@@ -120,10 +120,10 @@ it is possible to add packages at this stage like
         dpkg-reconfigure locales
         apt install openssh-server
 
-### add serial console
+#### add serial console
         systemctl enable serial-getty@ttyS0.service  # for sunxi boards
         systemctl enable serial-getty@ttyS2.service  # for rockchip boards
-### configure ethernet
+#### configure ethernet
 
         nano /etc/netplan/config-eth.yaml
 #### then add the foolwing on ubuntu rootfs
@@ -139,3 +139,21 @@ it is possible to add packages at this stage like
         allow-hotplug end0
         iface lo inet loopback
         iface end0 inet dhcp
+#### update source list
+##### for ubuntu use the follwing and change the distro name 
+
+        nano /etc/apt/sources.list
+
+        deb http://ports.ubuntu.com/ noble main universe
+        deb-src http://ports.ubuntu.com/ noble main universe
+        deb http://ports.ubuntu.com/ noble-security main universe
+        deb-src http://ports.ubuntu.com/ noble-security main universe
+        deb http://ports.ubuntu.com/ noblel-updates main universe
+        deb-src http://ports.ubuntu.com/ noble -updates main universe
+##### for debian use the follwing
+        deb http://deb.debian.org/debian/ buster main contrib non-free
+        deb-src http://deb.debian.org/debian/ buster main contrib non-free
+        deb http://deb.debian.org/debian/ buster-updates main contrib non-free
+        deb-src http://deb.debian.org/debian/ buster-updates main contrib non-free
+        deb http://deb.debian.org/debian-security/ buster/updates main contrib non-free
+        deb-src http://deb.debian.org/debian-security/ buster/updates main contrib non-free
