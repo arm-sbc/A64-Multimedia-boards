@@ -171,3 +171,18 @@ it is possible to add packages at this stage like
 ##### download firmware
        git clone  https://github.com/armbian/firmware.git
        then copy the firmware to /mnt/lib/
+##### create extlinux for booting
+        mkdir -p /mnt/boot/extlinux
+        nano /mnt/boot/extlinux/extlinux.conf
+        then add the follwing
+
+        label 6.9.9-arm-sunxi (Mainline)
+            kernel /boot/Image
+            fdt /boot/sun50i-a64-arm-sbc-m3x.dtb
+            append  earlyprintk console=ttyS0,115200n8 root=PARTUUID=b4407a7a-01 console=tty1  rootwait rw init=/sbin/init
+##### change root=PARTUUID=b4407a7a-01 by following
+        sudo blkid /dev/sdX 
+        ....outout will be as follows 
+        /dev/sdd1: UUID="b208c36b-39d5-47b9-b67d-943f4d4798b4" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="8c4fe090-01"
+        copy the PARTUUID and replace in extlinux conf.
+     
