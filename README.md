@@ -141,16 +141,19 @@ it is possible to add packages at this stage like
         iface end0 inet dhcp
 #### update source list
 ##### for ubuntu use the follwing and change the distro name 
-
         nano /etc/apt/sources.list
-
+        then add below repositories 
+        
         deb http://ports.ubuntu.com/ noble main universe
         deb-src http://ports.ubuntu.com/ noble main universe
         deb http://ports.ubuntu.com/ noble-security main universe
         deb-src http://ports.ubuntu.com/ noble-security main universe
         deb http://ports.ubuntu.com/ noblel-updates main universe
         deb-src http://ports.ubuntu.com/ noble -updates main universe
-##### for debian use the follwing
+##### for debian use the following
+        nano /etc/apt/sources.list
+        then add below repositories 
+        
         deb http://deb.debian.org/debian/ buster main contrib non-free
         deb-src http://deb.debian.org/debian/ buster main contrib non-free
         deb http://deb.debian.org/debian/ buster-updates main contrib non-free
