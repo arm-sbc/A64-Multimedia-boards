@@ -1,5 +1,5 @@
 # A64-Multimedia-boards
-source files and instructions for ARM-SBC-A64 boards
+Source files and instructions for ARM-SBC-A64 boards
 
 ## General Instructions
 The uboot,kernel and device tree files are available for download , either as a patch or as individual files.
