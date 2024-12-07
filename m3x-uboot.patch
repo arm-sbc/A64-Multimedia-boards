@@ -1,5 +1,4 @@
-diff -urN ..//u-boot/configs/a64-arm-sbc-m3x_defconfig u-boot/configs/a64-arm-sbc-m3x_defconfig
---- ..//u-boot/configs/a64-arm-sbc-m3x_defconfig	1970-01-01 04:00:00.000000000 +0400
+--- u-boot/configs/a64-arm-sbc-m3x_defconfig	1970-01-01 04:00:00.000000000 +0400
 +++ u-boot/configs/a64-arm-sbc-m3x_defconfig	2024-07-13 14:43:07.075516771 +0400
 @@ -0,0 +1,11 @@
 +CONFIG_ARM=y
@@ -13,8 +12,8 @@ diff -urN ..//u-boot/configs/a64-arm-sbc-m3x_defconfig u-boot/configs/a64-arm-sb
 +CONFIG_SUN8I_EMAC=y
 +CONFIG_USB_EHCI_HCD=y
 +CONFIG_USB_OHCI_HCD=y
-diff -urN ..//u-boot/configs/a64-arm-sbc-m3x_defconfig u-boot/configs/a64-arm-sbc-m3x_defconfig
---- ..//u-boot/configs/a64-arm-sbc-m3x_defconfig	1970-01-01 04:00:00.000000000 +0400
+
+--- u-boot/configs/a64-arm-sbc-m3x_defconfig	1970-01-01 04:00:00.000000000 +0400
 +++ u-boot/configs/a64-arm-sbc-m3x_defconfig	2024-07-13 14:43:07.075516771 +0400
 @@ -0,0 +1,11 @@
 +CONFIG_ARM=y
@@ -28,8 +27,8 @@ diff -urN ..//u-boot/configs/a64-arm-sbc-m3x_defconfig u-boot/configs/a64-arm-sb
 +CONFIG_SUN8I_EMAC=y
 +CONFIG_USB_EHCI_HCD=y
 +CONFIG_USB_OHCI_HCD=y
-diff -urN ..//u-boot/arch/arm/dts/Makefile u-boot/arch/arm/dts/Makefile
---- ..//u-boot/arch/arm/dts/Makefile	2024-07-13 14:59:13.899769393 +0400
+
+--- u-boot/arch/arm/dts/Makefile	2024-07-13 14:59:13.899769393 +0400
 +++ u-boot/arch/arm/dts/Makefile	2024-07-13 14:38:24.747471830 +0400
 @@ -687,6 +687,7 @@
  	sun50i-h616-x96-mate.dtb
@@ -39,8 +38,8 @@ diff -urN ..//u-boot/arch/arm/dts/Makefile u-boot/arch/arm/dts/Makefile
  	sun50i-a64-bananapi-m64.dtb \
  	sun50i-a64-nanopi-a64.dtb \
  	sun50i-a64-oceanic-5205-5inmfd.dtb \
-diff -urN ..//u-boot/arch/arm/dts/sun50i-a64-arm-sbc-m3x-v1.6.dts u-boot/arch/arm/dts/sun50i-a64-arm-sbc-m3x-v1.6.dts
---- ..//u-boot/arch/arm/dts/sun50i-a64-arm-sbc-m3x-v1.6.dts	1970-01-01 04:00:00.000000000 +0400
+
+--- u-boot/arch/arm/dts/sun50i-a64-arm-sbc-m3x-v1.6.dts	1970-01-01 04:00:00.000000000 +0400
 +++ u-boot/arch/arm/dts/sun50i-a64-arm-sbc-m3x-v1.6.dts	2024-07-13 14:33:42.354370644 +0400
 @@ -0,0 +1,395 @@
 +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
@@ -438,24 +437,3 @@ diff -urN ..//u-boot/arch/arm/dts/sun50i-a64-arm-sbc-m3x-v1.6.dts u-boot/arch/ar
 +	usb1_vbus-supply = <&reg_usb1_vbus>;
 +	status = "okay";
 +};
-diff -urN ..//u-boot/arch/arm/dts/sun50i-a64-olinuxino.dts u-boot/arch/arm/dts/sun50i-a64-olinuxino.dts
---- ..//u-boot/arch/arm/dts/sun50i-a64-olinuxino.dts	2024-07-13 14:59:13.959770552 +0400
-+++ u-boot/arch/arm/dts/sun50i-a64-olinuxino.dts	2024-07-13 14:41:13.332960212 +0400
-@@ -180,17 +180,6 @@
- 	 */
- };
- 
--&pio {
--	vcc-pa-supply = <&reg_dcdc1>;
--	vcc-pb-supply = <&reg_dcdc1>;
--	vcc-pc-supply = <&reg_dcdc1>;
--	vcc-pd-supply = <&reg_dcdc1>;
--	vcc-pe-supply = <&reg_aldo1>;
--	vcc-pf-supply = <&reg_dcdc1>;
--	vcc-pg-supply = <&reg_dldo4>;
--	vcc-ph-supply = <&reg_dcdc1>;
--};
--
- &r_rsb {
- 	status = "okay";
- 
