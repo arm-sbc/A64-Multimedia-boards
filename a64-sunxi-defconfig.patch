@@ -1,5 +1,4 @@
-diff -urN ..//..//linux-6.10-rc6/arch/arm64/configs/a64-sunxi_defconfig arch/arm64/configs/a64-sunxi_defconfig
---- ..//..//linux-6.10-rc6/arch/arm64/configs/a64-sunxi_defconfig	1970-01-01 04:00:00.000000000 +0400
+--- arch/arm64/configs/a64-sunxi_defconfig	1970-01-01 04:00:00.000000000 +0400
 +++ arch/arm64/configs/a64-sunxi_defconfig	2024-07-22 10:47:30.627018121 +0400
 @@ -0,0 +1,9063 @@
 +#
